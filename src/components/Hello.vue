@@ -5,6 +5,8 @@
         :title="btnMessage"
         :on-press="handleClick"
     />
+    <text class="count-text">{{clickCount}}</text>
+    <text>{{clickMotivation}}</text>
   </view>
 </template>
 
@@ -15,10 +17,18 @@ export default {
         btnMessage: "Click Me",
         clickCount: 0
     }),
+    computed: {
+        clickMotivation(){
+            if(this.clickCount < 5){
+                return 'Please Click Me!';
+            } else {
+                return "Good Job! Keep Clicking";
+            }
+        }
+    },
     methods: {
         handleClick(){
-            this.clickCount += 1;
-            alert('I am Clicked! Click Count ' + this.clickCount);
+            this.clickCount++;
         }
     },
 }
@@ -27,5 +37,8 @@ export default {
 <style scoped>
 .text-color-primary {
   color: blue;
+}
+.count-text {
+    font-size: 30px;
 }
 </style>

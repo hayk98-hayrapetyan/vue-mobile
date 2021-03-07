@@ -7,7 +7,7 @@
 <script>
 export default {
     data: () => ({
-        title: "I am Screen 1"
+        title: "I am Screen 2"
     })
 }
 </script>

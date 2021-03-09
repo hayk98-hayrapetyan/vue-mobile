@@ -1,14 +1,22 @@
 <template>
-  <view>
-    <text class="text-color-primary">{{title}}</text>
-  </view>
+  <ScreenWithDrawer 
+    :navigation="navigation" 
+    :headertitle="title"
+  >
+    <view>
+      <text class="text-color-primary">{{title}}</text>
+    </view>
+  </ScreenWithDrawer>
 </template>
 
 <script>
 export default {
+    props: {
+      navigation: Object
+    },
     data: () => ({
         title: "I am Screen 2"
-    })
+    }),
 }
 </script>
 

@@ -14,6 +14,7 @@ import { Root } from "native-base";
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const HomeStack = createStackNavigator(
   {
@@ -27,12 +28,30 @@ const HomeStack = createStackNavigator(
 
 const SomeOtherStack = createStackNavigator({
     Screen2,
+}, {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false
+  }
+})
+
+const SomeOtherOtherStack = createStackNavigator({
     Screen3
+}, {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false
+  }
+})
+
+const DrawerNavigation = createDrawerNavigator({
+    DrawerStack1: SomeOtherStack,
+    DrawerStack2: SomeOtherOtherStack,
 })
 
 const TabNavigation = createBottomTabNavigator({
     Meetups: HomeStack,
-    Other: SomeOtherStack
+    Other: DrawerNavigation
 })
 
 const AppNavigation = createAppContainer(TabNavigation)

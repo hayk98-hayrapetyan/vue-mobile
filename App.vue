@@ -1,38 +1,26 @@
 <template>
-  <view class="container">
-    <AppNavigation />
-  </view>
+  <App v-if="isAppReady" />
 </template>
 
 <script>
-import HomeScreen from "@/screens/HomeScreen";
-import Screen1 from "@/screens/Screen1";
-import Screen2 from "@/screens/Screen2";
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
-
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    ScreenOne: Screen1,
-    ScreenTwo: Screen2,
-  },
-  {
-    initialRouteName: 'Home'
-  }
-)
-
-const AppNavigation = createAppContainer(HomeStack)
+import App from "./src";
 
 export default {
-  components: {HomeScreen, AppNavigation},
+  components: {App},
+  data: () => ({
+    isAppReady: false
+  }),
+  async created(){
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+
+    this.isAppReady = true;
+  }
 }
 </script>
-
-<style scoped>
-.container {
-  flex: 1;
-  padding: 40px;
-}
-</style>

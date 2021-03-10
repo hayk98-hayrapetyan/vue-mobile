@@ -4,6 +4,7 @@
      <MeetupCard 
         v-for="meetup in meetups"
         :meetup="meetup"
+        :navigateToDetail="goToMeetupDetail"
         :key="meetup._id"
      />
   </scroll-view>
@@ -37,6 +38,9 @@ export default {
   methods: {
     goToScreen1(){
       this.navigation.navigate('ScreenOne');
+    },
+    goToMeetupDetail(meetupId){
+      this.navigation.navigate('Meetup', {meetupId});
     }
   }
 }

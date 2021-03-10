@@ -27,6 +27,11 @@
             <nb-text>{{meetup.joinedPeopleCount}} people are comming</nb-text>
           </nb-button>
         </nb-left>
+        <nb-right>
+          <nb-button :on-press="() => navigateToDetail(meetup._id)">
+            <nb-text>Visit meetup</nb-text>
+          </nb-button>
+        </nb-right>
       </nb-card-item>
     </nb-card>
   </scroll-view>
@@ -39,6 +44,9 @@ export default {
     meetup: {
       type: Object,
       required: true
+    },
+    navigateToDetail: {
+      type: Function
     }
   },
   data: () => ({
@@ -49,7 +57,7 @@ export default {
         marginBottom: 10
       }
     }
-  }),
+  })
 }
 </script>
 

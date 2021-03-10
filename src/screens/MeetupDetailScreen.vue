@@ -1,7 +1,8 @@
 <template>
 <view>
   <text>MeetUpDetail</text>
-  <text>{{meetupId}}</text>
+  <text>{{meetup.title}}</text>
+  <text>{{meetup.description}}</text>
 </view>
 </template>
 
@@ -12,11 +13,14 @@ export default {
             type: Object
         }
     },
-    data: () => ({
-        meetupId: ''
-    }),
+    computed: {
+        meetup() {
+            return this.$store.state.meetups.item;
+        }
+    },
     created(){
-        this.meetupId = this.navigation.getParam('meetupId', 'undefined');
+        const meetupId = this.navigation.getParam('meetupId', 'undefined');
+        this.$store.dispatch('meetups/fetchMeetupById', meetupId)
     }
 }
 </script>

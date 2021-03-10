@@ -23,6 +23,5 @@ export default {
 <style scoped>
 .container {
   flex: 1;
-  padding: 10px;
 }
 </style>

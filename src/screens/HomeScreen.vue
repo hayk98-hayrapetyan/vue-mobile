@@ -1,16 +1,19 @@
 <template>
   <scroll-view>
-    <nb-list>
-      <nb-list-item v-for="meetup in meetups" :key="meetup.title">
-        <nb-text>{{meetup.title}}</nb-text>
-      </nb-list-item>
-    </nb-list>
+    <nb-text class="header-1">Featured Meetups</nb-text>
+     <MeetupCard 
+        v-for="meetup in meetups"
+        :meetup="meetup"
+        :key="meetup._id"
+     />
   </scroll-view>
 </template>
 
 <script>
+import MeetupCard from "@/components/MeetupsCard.vue";
 
 export default {
+  components: {MeetupCard},
   props: {
     navigation: {
       type: Object
@@ -39,8 +42,10 @@ export default {
 }
 </script>
 
-<style>
-.text-color-primary {
-  color: blue;
+<style scoped>
+.header-1 {
+  font-size: 23px;
+  font-weight: bold;
+  padding: 20px;
 }
 </style>

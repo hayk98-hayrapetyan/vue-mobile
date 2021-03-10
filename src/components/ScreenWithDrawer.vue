@@ -23,23 +23,26 @@
 import {DrawerActions} from 'react-navigation-drawer';
 
 export default {
-    props: {
-      navigation: Object,
-      headerTitle: {
-          type: String,
-          default: 'Header'
-      }
-    },
-    methods: {
-      toggleDrawer(){
-        this.navigation.dispatch(DrawerActions.toggleDrawer())
-      }
+  props: {
+    navigation: Object,
+    headerTitle: {
+        type: String,
+        default: 'Header'
     }
+  },
+  methods: {
+    toggleDrawer(){
+      this.navigation.dispatch(DrawerActions.toggleDrawer())
+    }
+  }
 }
 </script>
 
 <style>
 .text-color-primary {
   color: blue;
+}
+.tt {
+  transform: scale(2);
 }
 </style>

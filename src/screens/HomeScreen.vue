@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   props: {
@@ -19,12 +18,14 @@ export default {
   },
   data: () => ({
     title: "Home Screen",
-    todos: []
   }),
-  created(){
-    axios.get('https://jsonplaceholder.typicode.com/todos').then(res => {
-      this.todos = res.data;
-    })
+  computed: {
+    todos(){
+      return this.$store.state.todos;
+    }
+  },
+  async created(){
+    await this.$store.dispatch('fetchTodos')
   },
   methods: {
     goToScreen1(){

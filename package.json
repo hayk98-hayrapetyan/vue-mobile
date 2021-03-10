@@ -32,7 +32,8 @@
     "react-navigation-stack": "^2.10.4",
     "react-navigation-tabs": "^2.11.0",
     "vue-native-core": "^0.2.0",
-    "vue-native-helper": "^0.2.0"
+    "vue-native-helper": "^0.2.0",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -12,7 +12,7 @@
           <MeetupDetailInfo :meetup="meetup" />
         </nb-tab>
         <nb-tab heading="Threads">
-          <text>Threads</text>
+          <MeetupThreads :threads="threads" />
         </nb-tab>
         <nb-tab heading="Joined People">
            <text>Joined People</text>
@@ -26,10 +26,12 @@
 <script>
 import Styles from "@/styles";
 import MeetupDetailInfo from "@/components/MeetupDetailInfo"
+import MeetupThreads from "@/components/MeetupThreads"
 
 export default {
     components: {
-      MeetupDetailInfo
+      MeetupDetailInfo,
+      MeetupThreads
     },
     props: {
         navigation: {
@@ -44,7 +46,7 @@ export default {
             return this.$store.state.meetups.item;
         },
         threads() {
-            return this.$store.state.threads.item;
+            return this.$store.state.threads.items;
         },
         isMeetupLoaded(){
             return Object.keys(this.meetup).length > 0

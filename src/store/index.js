@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Platform } from "react-native";
 
 import meetups from "./modules/meetups";
+import threads from "./modules/threads";
 
 Vue.use(Vuex);
 
@@ -11,24 +12,21 @@ const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3001/api/v1' : 'http:
 
 export default new Vuex.Store({
     state: {
-        todos: [],
+        
     },
     getters: {
 
     },
     mutations: {
-        setTodos(state, todos){
-            state.todos = todos;
+        setItems(state, {items, resources}){
+            state[resources].items = items;
         },
     },
     actions: {
-        fetchTodos({commit}){
-            axios.get('https://jsonplaceholder.typicode.com/todos').then(res => {
-                commit('setTodos', res.data);
-            })
-        },
+        
     },
     modules: {
-        meetups
+        meetups,
+        threads
     }
 })

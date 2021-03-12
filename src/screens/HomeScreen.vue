@@ -24,15 +24,11 @@ export default {
     title: "Home Screen",
   }),
   computed: {
-    todos(){
-      return this.$store.state.todos;
-    },
     meetups(){
       return this.$store.state.meetups.items;
     }
   },
   async created(){
-    await this.$store.dispatch('fetchTodos')
     await this.$store.dispatch('meetups/fetchMeetups')
   },
   methods: {

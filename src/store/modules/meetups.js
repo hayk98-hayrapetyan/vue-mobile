@@ -14,9 +14,6 @@ export default {
 
     },
     mutations: {
-        setMeetups(state, meetups){
-            state.items = meetups;
-        },
         setMeetup(state, meetup){
             state.item = meetup
         }
@@ -24,7 +21,7 @@ export default {
     actions: {
         fetchMeetups({commit}){
             axios.get(`${BASE_URL}/meetups`).then(res => {
-                commit('setMeetups', res.data);
+                commit('setItems', {items: res.data, resources: 'meetups'}, {root: true});
             })
         },
         fetchMeetupById({commit}, meetupId){

@@ -43,6 +43,9 @@ export default {
         meetup() {
             return this.$store.state.meetups.item;
         },
+        threads() {
+            return this.$store.state.threads.item;
+        },
         isMeetupLoaded(){
             return Object.keys(this.meetup).length > 0
         },
@@ -53,6 +56,7 @@ export default {
     created(){
         const meetupId = this.navigation.getParam('meetupId', 'undefined');
         this.$store.dispatch('meetups/fetchMeetupById', meetupId)
+        this.$store.dispatch('threads/fetchThreads', meetupId)
     }
 }
 </script>

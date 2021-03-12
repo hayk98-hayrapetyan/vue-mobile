@@ -22,7 +22,11 @@ const meetupsRoutes = require('./routes/meetups'),
       categoriesRoutes = require('./routes/categories'),
       apiRoutes = require('./routes/api');
 
-mongoose.connect(config.DB_URI, { useNewUrlParser: true })
+mongoose.connect(config.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   .then(() => console.log('DB Connected!'))
   .catch(err => console.log(err));
 
@@ -35,7 +39,7 @@ require('./socket')(io)
 app.use(cors())
 app.use(bodyParser.json());
 
-app.use('/api/v1', apiRoutes)
+app.use('/api/v1', apiRoutes);
 app.use('/api/v1/meetups', meetupsRoutes);
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/posts', postsRoutes);

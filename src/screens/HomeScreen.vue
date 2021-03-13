@@ -34,6 +34,7 @@ export default {
   },
   async created(){
     await this.$store.dispatch('meetups/fetchMeetups')
+    await this.$store.dispatch('meetups/fetchSecret')
   },
   methods: {
     goToScreen1(){

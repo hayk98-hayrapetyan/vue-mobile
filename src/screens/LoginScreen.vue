@@ -47,6 +47,8 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators';
+import { Toast } from "native-base";
+import { AsyncStorage } from "react-native";
 
 export default {
     props: {
@@ -60,6 +62,11 @@ export default {
             password: ''
         }
     }),
+    created(){
+        this.$store.dispatch('auth/verifyUser').then(() => {
+            this.navigation.navigate('Home');
+        })
+    },
     methods: {
         login(){
             this.$v.form.$touch();
@@ -67,6 +74,13 @@ export default {
             if(!this.$v.form.$invalid){
                 this.$store.dispatch('auth/login', this.form).then(user => {
                     this.navigation.navigate('Home');
+                }).catch(e => {
+                    Toast.show({
+                        text: "Wrong email or password!",
+                        buttonText: "Okay",
+                        type: "danger",
+                        duration: 3000
+                    })
                 })
             }
         },

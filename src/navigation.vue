@@ -66,8 +66,8 @@ const TabNavigation = createBottomTabNavigator({
 })
 
 const AppNavigation = createAppContainer(createSwitchNavigator({
-  // tabs: TabNavigation,
-  auth: AuthStack
+  auth: AuthStack,
+  tabs: TabNavigation
 }))
 
 

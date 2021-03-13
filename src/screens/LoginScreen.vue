@@ -9,25 +9,33 @@
     </nb-header>
     <nb-content padder>
       <nb-form>
-        <nb-item>
+        <InputWithError 
+            msg="Email is required"
+            :error="$v.form.email.$dirty && !$v.form.email.required"
+        >
           <nb-input 
             v-model="form.email" 
             placeholder="Email" 
             auto-capitalize="none"
+            :on-blur="() => $v.form.email.$touch()"
            />
-        </nb-item>
-        <nb-item last>
+        </InputWithError>
+        <InputWithError 
+            msg="Password is required"
+            :error="$v.form.password.$dirty && !$v.form.password.required"
+        >
           <nb-input 
             v-model="form.password"
             placeholder="Password" 
             auto-capitalize="none" 
             secure-text-entry 
+            :on-blur="() => $v.form.password.$touch()"
           />
-        </nb-item>
+        </InputWithError>
       </nb-form>
       <view :style="{marginTop:10}">
         <nb-button :on-press="login" block>
-          <nb-text>Login </nb-text>
+          <nb-text>Login</nb-text>
         </nb-button>
       </view>
       <nb-button :on-press="goToRegister" transparent>
@@ -38,6 +46,8 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators';
+
 export default {
     props: {
         navigation: {
@@ -52,10 +62,26 @@ export default {
     }),
     methods: {
         login(){
-            alert(this.login + "," + this.password)
+            this.$v.form.$touch();
+
+            if(!this.$v.form.$invalid){
+                this.$store.dispatch('auth/login', this.form).then(user => {
+                    this.navigation.navigate('Home');
+                })
+            }
         },
         goToRegister(){
             this.navigation.navigate('Register');
+        }
+    },
+    validations: {
+        form: {
+            email: {
+                required
+            },
+            password: {
+                required
+            }
         }
     }
 }

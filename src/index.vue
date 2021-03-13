@@ -11,11 +11,16 @@ import { VueNativeBase } from "native-base";
 import store from '@/store/';
 import ScreenWithDrawer from "@/components/ScreenWithDrawer";
 import moment from "moment";
+import Vuelidate from 'vuelidate';
 import AppMessage from "@/components/AppMessage";
+import InputWithError from "@/components/InputWithError";
 
 Vue.use(VueNativeBase);
+Vue.use(Vuelidate);
+
 Vue.component('ScreenWithDrawer', ScreenWithDrawer);
 Vue.component('AppMessage', AppMessage);
+Vue.component('InputWithError', InputWithError);
 Vue.prototype.$store = store;
 
 Vue.filter('uppercase', (value) => {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Platform } from "react-native";
 import { AsyncStorage } from "react-native";
 import jwtDecode from "jwt-decode";
+import axiosInstance from '@/services/axios';
 
 const isTokenValid = (token) => {
     if(token){
@@ -18,7 +19,7 @@ const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3001/api/v1' : 'http:
 export default {
     namespaced: true,
     state: {
-        user: {},
+        user: null,
         isAuth: false
     },
     getters: {
@@ -37,11 +38,19 @@ export default {
                 return state.user;
             })
         },
-        async verifyUser(){
+        fetchCurrentUser({commit, state}){
+            return axiosInstance.get(`${BASE_URL}/users/me`).then(res => {
+                AsyncStorage.setItem('meetuper-jwt', res.data.token);
+                commit('setAuthUser', res.data);
+                return state.user;
+            })
+        },
+        async verifyUser({dispatch}){
             const jwt = await AsyncStorage.getItem('meetuper-jwt');
 
             if(jwt && isTokenValid(jwt)){
-                return Promise.resolve(jwt);
+                const user = await dispatch('fetchCurrentUser');
+                return user ? Promise.resolve(jwt) : Promise.reject('Cannot fetch user');
             } else {
                 return Promise.reject('Token is not valid!');
             }

@@ -21,8 +21,8 @@ export default {
     },
     actions: {
         async fetchSecret(){
-            return axiosInstance.get(`${BASE_URL}/meetups/secret`).then(res => {
-                alert(JSON.stringify(res.data));
+            return axiosInstance.get(`${BASE_URL}/meetups/secret`).then(() => {
+                //
             })
         },
         fetchMeetups({commit}){

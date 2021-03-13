@@ -6,7 +6,7 @@
           <nb-thumbnail :source="{uri: meetup.meetupCreator.avatar}"></nb-thumbnail>
           <nb-body>
             <nb-text>{{meetup.title}}</nb-text>
-            <nb-text note>{{meetup.startDate}}</nb-text>
+            <nb-text note>{{meetup.startDate | formatDate('LLLL')}}</nb-text>
           </nb-body>
         </nb-left>
       </nb-card-item>

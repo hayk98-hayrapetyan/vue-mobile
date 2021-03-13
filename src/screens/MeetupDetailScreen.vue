@@ -3,7 +3,7 @@
   <view :style="Styles.container">
     <nb-h1 :style="Styles.headerOne">{{meetup.title}}</nb-h1>
     <nb-thumbnail :source="{uri: meetupCreator.avatar}" />
-    <nb-text :style="Styles.label">by {{meetupCreator.name}}</nb-text>
+    <nb-text :style="Styles.label">by {{meetupCreator.name | uppercase}}</nb-text>
   </view>
   <nb-content>
     <nb-card>

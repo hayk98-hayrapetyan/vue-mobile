@@ -18,7 +18,6 @@ export default {
     actions: {
         fetchThreads({commit}, meetupId){
             axios.get(`${BASE_URL}/threads?meetupId=${meetupId}`).then(res => {
-                console.log(res.data.threads)
                 commit('setItems', {items: res.data.threads, resources: 'threads'}, {root: true});
             })
         },

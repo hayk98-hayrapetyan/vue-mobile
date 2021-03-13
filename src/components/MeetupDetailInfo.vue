@@ -3,7 +3,7 @@
     <nb-card-item bordered>
         <nb-body>
             <nb-text :style="Styles.label">Date</nb-text>
-            <nb-text>{{meetup.startDate}}</nb-text>
+            <nb-text>{{meetup.startDate | formatDate}}</nb-text>
 
             <nb-text :style="Styles.label">From</nb-text>
             <nb-text>{{meetup.timeFrom}}</nb-text>

@@ -1,7 +1,7 @@
 <template>
   <scroll-view>
     <nb-text class="header-1">Featured Meetups</nb-text>
-    <nb-text :style="{paddingLeft: 20}">Welcome {{user.username}}</nb-text>
+    <nb-text :style="{paddingLeft: 20}" v-if="user">Welcome {{user.username}}</nb-text>
      <MeetupCard 
         v-for="meetup in meetups"
         :meetup="meetup"

@@ -44,6 +44,13 @@ export default {
         register({commit}, userData){
             return axios.post(`${BASE_URL}/users/register`, userData);
         },
+        logout({commit}){
+            return new Promise((resolve) => {
+                AsyncStorage.removeItem('meetuper-jwt');
+                commit('setAuthUser', null);
+                resolve();
+            })
+        },
         fetchCurrentUser({commit, state}){
             return axiosInstance.get(`${BASE_URL}/users/me`).then(res => {
                 AsyncStorage.setItem('meetuper-jwt', res.data.token);

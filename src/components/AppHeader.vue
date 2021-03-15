@@ -34,8 +34,7 @@ export default {
         }
     },
     data: () => ({
-        btnOptions: ["Login", "Register", "Settings", "Logout", "Cancel"],
-        clicked: 0
+        btnOptions: ["Login", "Register", "Create Meetup", "Logout", "Cancel"],
     }),
     computed: {
        optionCancelIndex(){
@@ -54,11 +53,28 @@ export default {
                     destructiveButtonIndex: this.optionDestructiveIndex,
                     title: "Select An Option"
                 },
-                buttonIndex => {
-                    this.clicked = this.btnOptions[buttonIndex];
-                    alert(this.clicked)
-                }
+                this.handleOptionSelect
             );
+        },
+        handleOptionSelect(buttonIndex){
+            const option = this.btnOptions[buttonIndex];
+            
+            switch(option){
+                case 'Login':
+                    this.navigation.navigate('Login');
+                    break;
+                case 'Register':
+                    this.navigation.navigate('Register');
+                    break;
+                case 'Create Meetup':
+                    break;
+                case 'Logout':
+                    this.$store.dispatch('auth/logout')
+                        .then(() => this.navigation.navigate('Home'));
+                    break;
+                default:
+                    return null;
+            }
         },
         goBack(){
             this.navigation.goBack();

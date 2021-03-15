@@ -9,9 +9,6 @@
     <scroll-view>
       <nb-text class="header-1">Featured Meetups</nb-text>
       <nb-text :style="{paddingLeft: 20}" v-if="user">Welcome {{user.username}}</nb-text>
-      <nb-button :on-press="logout" transparent>
-        <nb-text>Logout</nb-text>
-      </nb-button>
       <MeetupCard 
           v-for="meetup in meetups"
           :meetup="meetup"
@@ -24,7 +21,6 @@
 
 <script>
 import MeetupCard from "@/components/MeetupsCard.vue";
-import { AsyncStorage } from "react-native";
 
 export default {
   components: {MeetupCard},
@@ -54,9 +50,6 @@ export default {
     goToMeetupDetail(meetupId){
       this.navigation.navigate('Meetup', {meetupId});
     },
-    logout(){
-      AsyncStorage.removeItem('meetuper-jwt');
-    }
   }
 }
 </script>

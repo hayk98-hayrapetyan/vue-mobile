@@ -1,4 +1,5 @@
 <template>
+  <!--  :class="{'container-android': Platform && Platform.OS === 'android'}" -->
   <view class="container">
     <Navigation v-if="isAuthResolved" />
     <nb-container v-else class="spinner-container">
@@ -8,13 +9,16 @@
 </template>
 
 <script>
-import Navigation from "./navigation.vue";
 import Vue from "vue-native-core";
 import { VueNativeBase } from "native-base";
-import store from '@/store/';
-import ScreenWithDrawer from "@/components/ScreenWithDrawer";
+import { Platform } from "react-native";
+
+import Navigation from "./navigation.vue";
 import moment from "moment";
 import Vuelidate from 'vuelidate';
+import store from '@/store/';
+
+import ScreenWithDrawer from "@/components/ScreenWithDrawer";
 import AppMessage from "@/components/AppMessage";
 import InputWithError from "@/components/InputWithError";
 import AppNavigationEvents from '@/react-components/appNavigationEvents';
@@ -28,6 +32,7 @@ Vue.component('AppMessage', AppMessage);
 Vue.component('InputWithError', InputWithError);
 Vue.component('AppNavigationEvents', AppNavigationEvents);
 Vue.component('AppHeader', AppHeader);
+
 Vue.prototype.$store = store;
 
 Vue.filter('uppercase', (value) => {
@@ -54,6 +59,9 @@ export default {
     this.$store.dispatch('auth/verifyUser')
         .catch(() => {});
   },
+  data: () => ({
+    Platform
+  }),
   computed: {
     isAuthResolved(){
       return this.$store.state.auth.isAuthResolved;
@@ -65,6 +73,9 @@ export default {
 <style scoped>
 .container {
   flex: 1;
+}
+.container-android {
+  padding-top: 23px;
 }
 .spinner-container {
   display: flex;

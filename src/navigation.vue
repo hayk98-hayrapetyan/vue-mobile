@@ -13,6 +13,7 @@ import RegisterScreen from "@/screens/RegisterScreen";
 import Screen1 from "@/screens/Screen1";
 import Screen2 from "@/screens/Screen2";
 import Screen3 from "@/screens/Screen3";
+
 import { Root } from "native-base";
 
 import { createStackNavigator } from 'react-navigation-stack';

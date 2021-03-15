@@ -33,7 +33,7 @@ const HomeStack = createStackNavigator(
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen
-}, {
+},{
   headerMode: 'none'
 })
 

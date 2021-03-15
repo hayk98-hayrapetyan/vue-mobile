@@ -64,12 +64,13 @@
             last 
             placeholder="Password Confirmation" 
             auto-capitalize="none" 
+            secure-text-entry
             :on-blur="() => $v.form.passwordConfirmation.$touch()"
           />
         </InputWithError>
       </nb-form>
       <view :style="{marginTop:10}">
-        <nb-button block>
+        <nb-button block :on-press="register">
           <nb-text>Register</nb-text>
         </nb-button>
       </view>
@@ -82,6 +83,7 @@
 
 <script>
 import { required, minLength, sameAs, email } from 'vuelidate/lib/validators';
+import { Toast } from 'native-base'; 
 
 export default {
     props: {
@@ -95,16 +97,33 @@ export default {
             name: '',
             avatar: '',
             email: '',
-            passsword: '',
+            password: '',
             passwordConfirmation: ''
         }
     }),
     methods: {
         register(){
             this.$v.form.$touch();
+
+            if(!this.$v.form.$invalid){
+              this.$store.dispatch('auth/register', this.form)
+                .then(() => this.navigateToLogin())
+                .catch((e) => {
+                  alert(e);
+                  Toast.show({
+                      text: "Ooops something gone wrong!",
+                      buttonText: "Okay",
+                      type: "danger",
+                      duration: 3000
+                  })
+                })
+            }
         },
         goToLogin(){
             this.navigation.navigate('Login');
+        },
+        navigateToLogin(){
+          this.navigation.navigate('Login', {message: "You have been successfully registered. You can login now :)"});
         }
     },
     validations: {

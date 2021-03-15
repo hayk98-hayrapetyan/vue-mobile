@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const config = require('./config');
+const morgan = require('morgan');
 
 const passport = require('passport');
 const path = require('path');
@@ -37,6 +38,7 @@ const io = require('socket.io')(server, {pingTimeout: 60000})
 require('./socket')(io)
 
 app.use(cors())
+app.use(morgan('dev'))
 app.use(bodyParser.json());
 
 app.use('/api/v1', apiRoutes);

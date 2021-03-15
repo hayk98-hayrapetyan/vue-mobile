@@ -29,7 +29,6 @@ exports.getCurrentUser = function (req, res, next) {
 
 exports.register = function(req, res) {
   const registerData = req.body
-
   if (!registerData.email) {
     return res.status(422).json({
       errors: {

@@ -20,14 +20,17 @@ export default {
     namespaced: true,
     state: {
         user: null,
-        isAuth: false
+        isAuthResolved: false
     },
     getters: {
-
+        isAuth: state => !!state.user
     },
     mutations: {
         setAuthUser(state, user){
             state.user = user
+        },
+        resloveAuth(state){
+            state.isAuthResolved = true
         }
     },
     actions: {
@@ -38,20 +41,25 @@ export default {
                 return state.user;
             })
         },
+        register({commit}, userData){
+            return axios.post(`${BASE_URL}/users/register`, userData);
+        },
         fetchCurrentUser({commit, state}){
             return axiosInstance.get(`${BASE_URL}/users/me`).then(res => {
                 AsyncStorage.setItem('meetuper-jwt', res.data.token);
                 commit('setAuthUser', res.data);
                 return state.user;
-            })
+            }).catch(() => undefined);
         },
-        async verifyUser({dispatch}){
+        async verifyUser({dispatch, commit}){
             const jwt = await AsyncStorage.getItem('meetuper-jwt');
 
             if(jwt && isTokenValid(jwt)){
                 const user = await dispatch('fetchCurrentUser');
+                commit('resloveAuth');
                 return user ? Promise.resolve(jwt) : Promise.reject('Cannot fetch user');
             } else {
+                commit('resloveAuth');
                 return Promise.reject('Token is not valid!');
             }
         }

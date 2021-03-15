@@ -1,8 +1,6 @@
 <template>
-  <nb-container class="spinner-container" v-if="isCheckingUser">
-    <nb-spinner color="blue" />
-  </nb-container>
-  <nb-container v-else :style="{backgroundColor: '#fff'}">
+  <nb-container :style="{backgroundColor: '#fff'}">
+    <AppNavigationEvents :onDidFocus="checkForMessage" />
     <nb-header>
       <nb-body>
         <nb-title>
@@ -62,17 +60,17 @@ export default {
         }
     },
     data: () => ({
-        isCheckingUser: false,
         form: {
             email: '',
             password: ''
         }
     }),
     created(){
-        this.isCheckingUser = true;
-        this.$store.dispatch('auth/verifyUser').then(() => {
-            this.navigation.navigate('Home');
-        }).catch(() => this.isCheckingUser = false)
+        const isAuth = this.$store.getters['auth/isAuth'];
+
+        if(isAuth){
+          this.navigation.navigate('Home');
+        }
     },
     methods: {
         login(){
@@ -81,7 +79,7 @@ export default {
             if(!this.$v.form.$invalid){
                 this.$store.dispatch('auth/login', this.form).then(user => {
                     this.navigation.navigate('Home');
-                }).catch(e => {
+                }).catch(() => {
                     Toast.show({
                         text: "Wrong email or password!",
                         buttonText: "Okay",
@@ -91,12 +89,23 @@ export default {
                 })
             }
         },
+        checkForMessage(){
+          const message = this.navigation.getParam('message');
+          if(message){
+            Toast.show({
+                text: message,
+                buttonText: "Okay",
+                type: "success",
+                duration: 3000
+            })
+          }
+        },
         goToRegister(){
             this.navigation.navigate('Register');
         },
         goToHome(){
             this.navigation.navigate('Home');
-        }
+        },
     },
     validations: {
         form: {
@@ -110,10 +119,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.spinner-container {
-  display: flex;
-  justify-content: center;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
 <nb-container v-if="isMeetupLoaded">
-  <AppHeader screen="Meetup" />
+  <AppHeader screen="Meetup" :navigation="navigation" />
   <view :style="Styles.container">
     <nb-h1 :style="Styles.headerOne">{{meetup.title}}</nb-h1>
     <nb-thumbnail :source="{uri: meetupCreator.avatar}" />

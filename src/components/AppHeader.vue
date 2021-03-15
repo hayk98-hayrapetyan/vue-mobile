@@ -1,7 +1,7 @@
 <template>
     <nb-header>
       <nb-left>
-        <nb-button transparent>
+        <nb-button v-if="!root" :on-press="goBack" transparent>
           <nb-icon name="arrow-back" />
         </nb-button>
       </nb-left>
@@ -22,6 +22,18 @@ export default {
         screen: {
             type: String,
             default: 'Header'
+        },
+        root: {
+            type: Boolean
+        },
+        navigation: {
+            type: Object,
+            required: true
+        }
+    },
+    methods: {
+        goBack(){
+            this.navigation.goBack();
         }
     }
 }

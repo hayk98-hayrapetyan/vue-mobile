@@ -18,7 +18,8 @@ import Vuelidate from 'vuelidate';
 import AppMessage from "@/components/AppMessage";
 import InputWithError from "@/components/InputWithError";
 import AppNavigationEvents from '@/react-components/appNavigationEvents';
-
+import AppHeader from "@/components/AppHeader";
+ 
 Vue.use(VueNativeBase);
 Vue.use(Vuelidate);
 
@@ -26,6 +27,7 @@ Vue.component('ScreenWithDrawer', ScreenWithDrawer);
 Vue.component('AppMessage', AppMessage);
 Vue.component('InputWithError', InputWithError);
 Vue.component('AppNavigationEvents', AppNavigationEvents);
+Vue.component('AppHeader', AppHeader);
 Vue.prototype.$store = store;
 
 Vue.filter('uppercase', (value) => {

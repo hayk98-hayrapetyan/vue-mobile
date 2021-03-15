@@ -26,7 +26,11 @@ const HomeStack = createStackNavigator(
     ScreenOne: Screen1,
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
   }
 )
 

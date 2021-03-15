@@ -33,16 +33,23 @@ export default {
             required: true
         }
     },
-    data: () => ({
-        btnOptions: ["Login", "Register", "Create Meetup", "Logout", "Cancel"],
-    }),
     computed: {
-       optionCancelIndex(){
-           return this.btnOptions.length - 1;
-       },
-       optionDestructiveIndex(){
-           return this.btnOptions.length - 2;
-       }
+        optionCancelIndex(){
+            return this.btnOptions.length - 1;
+        },
+        optionDestructiveIndex(){
+            return this.isAuth ? this.optionCancelIndex.length - 1 : -1;
+        },
+        isAuth(){
+            return this.$store.getters['auth/isAuth'];
+        },
+        btnOptions(){
+            if(!this.isAuth){
+                return ["Login", "Register", "Cancel"];
+            } else{
+                return ["Create Meetup", "Logout", "Cancel"];
+            }
+        }
     },
     methods: {
         displayActionsheet(){
@@ -67,6 +74,7 @@ export default {
                     this.navigation.navigate('Register');
                     break;
                 case 'Create Meetup':
+                    this.navigation.navigate('MeetupCreate');
                     break;
                 case 'Logout':
                     this.$store.dispatch('auth/logout')

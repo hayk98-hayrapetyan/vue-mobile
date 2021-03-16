@@ -8,15 +8,15 @@
     </view>
     <nb-content>
         <nb-form>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Location</nb-label>
                 <nb-input v-model="form.location"/>
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Title</nb-label>
                 <nb-input v-model="form.title"/>
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Start Date</nb-label>
                 <!-- <nb-input v-model="form.startDate"/> -->
                 <view class="category">
@@ -35,17 +35,17 @@
                     />
                 </view>
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Time From</nb-label>
                 <!-- <nb-input v-model="form.timeFrom"/> -->
                 <AppTimePicker :onValueChange="(time) => setTime(time, 'timeFrom')" />
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Time To</nb-label>
                 <!-- <nb-input v-model="form.timeTo"/> -->
                 <AppTimePicker :onValueChange="(time) => setTime(time, 'timeTo')" />
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Category</nb-label>
                 <view class="category">
                     <nb-picker
@@ -65,15 +65,20 @@
                     </nb-picker>
                 </view>
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Image</nb-label>
                 <nb-input v-model="form.image"/>
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Description</nb-label>
-                <nb-input v-model="form.description"/>
+                <nb-textarea 
+                    :rowSpan="5" 
+                    bordered 
+                    v-model="form.description" 
+                    :style="{width: '100%'}"
+                />
             </nb-item>
-            <nb-item stackedLabel>
+            <nb-item stackedLabel class="no-margin">
                 <nb-label>Additional Info</nb-label>
                 <nb-input v-model="form.shortInfo"/>
             </nb-item>
@@ -161,5 +166,10 @@ export default {
     padding-left: 0;
     margin-left: 0;
     height: 50;
+}
+.no-margin {
+    margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 </style>

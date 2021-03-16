@@ -21,6 +21,7 @@ import store from '@/store/';
 import ScreenWithDrawer from "@/components/ScreenWithDrawer";
 import AppMessage from "@/components/AppMessage";
 import InputWithError from "@/components/InputWithError";
+import AppTimePicker from "@/components/AppTimePicker";
 import AppNavigationEvents from '@/react-components/appNavigationEvents';
 import AppHeader from "@/components/AppHeader";
  
@@ -30,6 +31,7 @@ Vue.use(Vuelidate);
 Vue.component('ScreenWithDrawer', ScreenWithDrawer);
 Vue.component('AppMessage', AppMessage);
 Vue.component('InputWithError', InputWithError);
+Vue.component('AppTimePicker', AppTimePicker);
 Vue.component('AppNavigationEvents', AppNavigationEvents);
 Vue.component('AppHeader', AppHeader);
 

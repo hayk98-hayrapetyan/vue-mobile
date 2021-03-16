@@ -37,11 +37,13 @@
             </nb-item>
             <nb-item stackedLabel>
                 <nb-label>Time From</nb-label>
-                <nb-input v-model="form.timeFrom"/>
+                <!-- <nb-input v-model="form.timeFrom"/> -->
+                <AppTimePicker :onValueChange="(time) => setTime(time, 'timeFrom')" />
             </nb-item>
             <nb-item stackedLabel>
                 <nb-label>Time To</nb-label>
-                <nb-input v-model="form.timeTo"/>
+                <!-- <nb-input v-model="form.timeTo"/> -->
+                <AppTimePicker :onValueChange="(time) => setTime(time, 'timeTo')" />
             </nb-item>
             <nb-item stackedLabel>
                 <nb-label>Category</nb-label>
@@ -144,6 +146,9 @@ export default {
         setDate(date){
             alert(new Date(date.timestamp));
             this.form.startDate = new Date(date.timestamp);
+        },
+        setTime(time, label){
+            this.form[label] = time;
         }
     }
 }

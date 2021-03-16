@@ -143,7 +143,9 @@ export default {
     },
     methods: {
         createMeetup () {
-            alert(JSON.stringify(this.form))
+            this.$store.dispatch('meetups/createMeetup', this.form).then(res => {
+                this.navigation.navigate('Meetup', {meetupId: res._id});
+            })
         },
         onCategoryChange(category){
             this.form.category = category;

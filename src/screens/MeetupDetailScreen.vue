@@ -1,10 +1,23 @@
 <template>
 <nb-container v-if="isMeetupLoaded">
   <AppHeader screen="Meetup" :navigation="navigation" />
-  <view :style="Styles.container">
+  <!--<view :style="Styles.container">
     <nb-h1 :style="Styles.headerOne">{{meetup.title}}</nb-h1>
     <nb-thumbnail :source="{uri: meetupCreator.avatar}" />
     <nb-text :style="Styles.label">by {{meetupCreator.name | uppercase}}</nb-text>
+  </view>-->
+  <view :style="[styles.imageWrapper]">
+    <ImageBackground
+      resizeMode='cover'
+      :style="styles.backgroundImage"
+      :source="{uri: meetup.image}"
+    >
+      <view :style="[styles.container, {backgroundColor: 'rgba(0,0,0,0.5)', height: '100%'}]">
+        <nb-h1 :style="[styles.headerOne, {color: 'white'}]">{{meetup.title}}</nb-h1>
+        <nb-thumbnail class="user-image" :style="{marginTop: 10, marginBottom: 10}" :source="{uri: meetupCreator.avatar}"/>
+        <nb-text :style="[styles.label, {color: 'white'}]">by {{meetupCreator.name | uppercase}}</nb-text>
+      </view>
+    </ImageBackground>
   </view>
   <nb-content>
     <nb-card>
@@ -25,16 +38,18 @@
 </template>
 
 <script>
-import Styles from "@/styles";
+import styles from "@/styles";
 import MeetupDetailInfo from "@/components/MeetupDetailInfo"
 import MeetupThreads from "@/components/MeetupThreads"
 import MeetupPeople from "@/components/MeetupPeople"
+import {ImageBackground} from 'react-native';
 
 export default {
     components: {
       MeetupDetailInfo,
       MeetupThreads,
-      MeetupPeople
+      MeetupPeople,
+      ImageBackground
     },
     props: {
         navigation: {
@@ -42,7 +57,7 @@ export default {
         }
     },
     data: () => ({
-        Styles
+        styles
     }),
     computed: {
         meetup() {

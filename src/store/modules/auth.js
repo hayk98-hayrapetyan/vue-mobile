@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { Platform } from "react-native";
 import { AsyncStorage } from "react-native";
 import jwtDecode from "jwt-decode";
 import axiosInstance from '@/services/axios';
@@ -12,9 +10,6 @@ const isTokenValid = (token) => {
 
     return false;
 }
-
-
-const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3001/api/v1' : 'http://10.0.2.2:3001/api/v1';
 
 export default {
     namespaced: true,
@@ -35,14 +30,14 @@ export default {
     },
     actions: {
         login({commit, state}, userData){
-            return axios.post(`${BASE_URL}/users/login`, userData).then(res => {
+            return axiosInstance.post(`/users/login`, userData).then(res => {
                 AsyncStorage.setItem('meetuper-jwt', res.data.token)
                 commit('setAuthUser', res.data);
                 return state.user;
             })
         },
-        register({commit}, userData){
-            return axios.post(`${BASE_URL}/users/register`, userData);
+        register({}, userData){
+            return axiosInstance.post(`/users/register`, userData);
         },
         logout({commit}){
             return new Promise((resolve) => {
@@ -52,7 +47,7 @@ export default {
             })
         },
         fetchCurrentUser({commit, state}){
-            return axiosInstance.get(`${BASE_URL}/users/me`).then(res => {
+            return axiosInstance.get(`/users/me`).then(res => {
                 AsyncStorage.setItem('meetuper-jwt', res.data.token);
                 commit('setAuthUser', res.data);
                 return state.user;

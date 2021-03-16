@@ -18,7 +18,22 @@
             </nb-item>
             <nb-item stackedLabel>
                 <nb-label>Start Date</nb-label>
-                <nb-input v-model="form.startDate"/>
+                <!-- <nb-input v-model="form.startDate"/> -->
+                <view class="category">
+                    <nb-date-picker
+                        :defaultDate="defaultDate"
+                        :value="form.startDate"
+                        :minimumDate="minimumDate"
+                        :maximumDate="maximumDate"
+                        :modalTransparent="false"
+                        animationType="fade"
+                        androidMode="default"
+                        placeHolderText="Select date"
+                        :textStyle="{ color: 'green' }"
+                        :placeHolderTextStyle="{ color: '#d3d3d3' }"
+                        :onDateChange="() => setDate()"
+                    />
+                </view>
             </nb-item>
             <nb-item stackedLabel>
                 <nb-label>Time From</nb-label>
@@ -60,7 +75,6 @@
                 <nb-label>Additional Info</nb-label>
                 <nb-input v-model="form.shortInfo"/>
             </nb-item>
-            <nb-button block>
             <nb-button :on-press="createMeetup" block>
                 <nb-text>Create Meetup</nb-text>
             </nb-button>
@@ -85,14 +99,14 @@ export default {
         form: {
             location: null,
             title: null,
-            startDate: null,
+            startDate: new Date(),
             category: null,
             image: null,
             shortInfo: null,
             description: null,
             timeTo: null,
             timeFrom: null
-        }
+        },
     }),
     computed: {
         categories(){
@@ -103,6 +117,18 @@ export default {
         },
         hasCategories(){
             return this.categories && this.categories.length;
+        },
+        defaultDate(){
+            return new Date();
+        },
+        minimumDate(){
+            return new Date();
+        },
+        maximumDate(){
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth();
+            const day = new Date().getDate();
+            return new Date(year + 1, month, day);
         }
     },
     created(){
@@ -114,6 +140,10 @@ export default {
         },
         onCategoryChange(category){
             this.form.category = category;
+        },
+        setDate(date){
+            alert(new Date(date.timestamp));
+            this.form.startDate = new Date(date.timestamp);
         }
     }
 }

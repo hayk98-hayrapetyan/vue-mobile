@@ -9,13 +9,13 @@
   <nb-content>
     <nb-card>
       <nb-tabs>
-        <nb-tab heading="Details">
+        <nb-tab heading="Details" :tabStyle={}>
           <MeetupDetailInfo :meetup="meetup" />
         </nb-tab>
-        <nb-tab heading="Threads">
+        <nb-tab heading="Threads" :tabStyle={}>
           <MeetupThreads :threads="threads" />
         </nb-tab>
-        <nb-tab heading="Joined People">
+        <nb-tab heading="Joined People" :tabStyle={}>
           <MeetupPeople :people="meetup.joinedPeople" />
         </nb-tab>
       </nb-tabs>
